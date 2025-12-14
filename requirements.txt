@@ -3,3 +3,5 @@ black==25.1.0
 kagglehub==0.1.8
 Pillow==10.1.0
 tqdm==4.66.1
+ultralytics>=8.0.0
+PyYAML>=6.0
