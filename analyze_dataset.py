@@ -1,6 +1,8 @@
 from pathlib import Path
 
 import kagglehub
+import numpy as np
+import matplotlib.pyplot as plt
 from PIL import Image
 from tqdm import tqdm
 
@@ -61,11 +63,53 @@ def analyze_dataset(dataset_path: str):
     return summary
 
 
+def recommend_imgsz(summary):
+    widths = []
+    heights = []
+
+    for split_data in summary.values():
+        widths.extend(split_data["image_widths"])
+        heights.extend(split_data["image_heights"])
+
+    widths = np.array(widths)
+    heights = np.array(heights)
+
+    print("\n=== Image size statistics ===")
+    print(f"Median width: {np.median(widths):.0f}")
+    print(f"Median height: {np.median(heights):.0f}")
+    print(f"95 percentile width: {np.percentile(widths, 95):.0f}")
+    print(f"95 percentile height: {np.percentile(heights, 95):.0f}")
+
+
+def plot_image_size_distribution(summary):
+    widths, heights = [], []
+
+    for split_data in summary.values():
+        widths.extend(split_data["image_widths"])
+        heights.extend(split_data["image_heights"])
+
+    plt.figure()
+    plt.hist(widths, bins=50)
+    plt.title("Image width distribution")
+    plt.xlabel("Width (px)")
+    plt.ylabel("Count")
+    plt.show()
+
+    plt.figure()
+    plt.hist(heights, bins=50)
+    plt.title("Image height distribution")
+    plt.xlabel("Height (px)")
+    plt.ylabel("Count")
+    plt.show()
+
+
 def main():
     path = kagglehub.dataset_download("vodan37/yolo-helmethead")
     print("Path to dataset files:", path)
 
-    analyze_dataset(path)
+    summary = analyze_dataset(path)
+    plot_image_size_distribution(summary)
+    recommend_imgsz(summary)
     print("\nDataset analysis completed.")
 
 
