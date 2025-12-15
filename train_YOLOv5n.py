@@ -6,14 +6,9 @@ import tempfile
 import os
 
 def main():
-    # Download dataset
     path = Path(kagglehub.dataset_download("vodan37/yolo-helmethead"))
     yaml_path = path / "helm" / "helm" / "helm.yaml"
-
-    # Initialize YOLOv5n model
     model = YOLO('yolov5n.pt')
-
-    # Train the model
     print("Starting training...")
     results = model.train(
         data=yaml_path,
@@ -32,7 +27,6 @@ def main():
     print("\nRunning validation on validation set...")
     val_results = model.val()
     
-    # Print basic metrics for validation set
     print("\n" + "="*50)
     print("VALIDATION METRICS")
     print("="*50)
@@ -45,17 +39,11 @@ def main():
     print("\n" + "="*50)
     print("Testing on test set...")
     print("="*50)
-    
-    # Read original YAML
     with open(yaml_path, 'r') as f:
         data_config = yaml.safe_load(f)
-    
-    # Create temporary YAML with test set as validation set
     test_img_dir = path / "helm" / "helm" / "images" / "test"
     test_label_dir = path / "helm" / "helm" / "labels" / "test"
-    
     if test_img_dir.exists() and test_label_dir.exists():
-        # Create temp YAML for testing
         test_config = data_config.copy()
         test_config['val'] = str(test_img_dir)
         
@@ -64,7 +52,6 @@ def main():
             tmp_yaml_path = tmp_file.name
         
         try:
-            # Validate on test set
             test_results = model.val(data=tmp_yaml_path)
             
             print(f"Test mAP50: {test_results.box.map50:.4f}")
@@ -72,7 +59,6 @@ def main():
             print(f"Test Precision: {test_results.box.mp:.4f}")
             print(f"Test Recall: {test_results.box.mr:.4f}")
         finally:
-            # Clean up temp file
             os.unlink(tmp_yaml_path)
     else:
         print("Test set directory not found. Skipping test set evaluation.")
