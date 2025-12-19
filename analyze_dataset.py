@@ -1,8 +1,8 @@
 from pathlib import Path
 
 import kagglehub
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 from PIL import Image
 from tqdm import tqdm
 
