@@ -1,14 +1,3 @@
-import os
-import tempfile
-from pathlib import Path
-
-import kagglehub
-import yaml
-from ultralytics import YOLO
-
-import constants
-
-
 def analyze_results(model, config_path, dataset_path):
     print("\n" + "=" * 50)
     print("Training completed!")
@@ -59,28 +48,3 @@ def analyze_results(model, config_path, dataset_path):
     print("\n" + "=" * 50)
     print("Training and evaluation completed!")
     print("=" * 50)
-
-
-def main():
-    dataset_path = Path(kagglehub.dataset_download("vodan37/yolo-helmethead"))
-    yaml_path = dataset_path / "helm" / "helm" / "helm.yaml"
-
-    model = YOLO(constants.MODEL_NAME)
-
-    model.train(
-        data=yaml_path,
-        epochs=constants.EPOCHS,
-        imgsz=constants.IMAGE_SIZE,
-        batch=constants.BATCH_SIZE,
-        device=constants.DEVICE,
-        cache=constants.CACHE,
-        seed=constants.SEED,
-        project=constants.PROJECT_NAME,
-        name=constants.RUN_NAME,
-    )
-
-    analyze_results(model, yaml_path, dataset_path)
-
-
-if __name__ == "__main__":
-    main()

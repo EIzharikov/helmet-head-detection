@@ -1,31 +1,19 @@
-# constants.py
 from pathlib import Path
 
 # =====================
 # Dataset
 # =====================
 KAGGLE_DATASET = "vodan37/yolo-helmethead"
-
 DATA_YAML_RELATIVE = Path("helm/helm/helm.yaml")
 
-# =====================
-# Model
-# =====================
-MODEL_NAME = "yolov8n.pt"
-
-# =====================
-# Training hyperparameters
-# =====================
-EPOCHS = 2
-BATCH_SIZE = 16
-IMAGE_SIZE = 640
-DEVICE = 0
-
-CACHE = False
-SEED = 0
+# полный путь к yaml после скачивания
+def get_yaml_path(dataset_path: Path):
+    return dataset_path / DATA_YAML_RELATIVE
 
 # =====================
 # Experiment
 # =====================
 PROJECT_NAME = "helmet-head-detection"
 RUN_NAME = "yolov8n_baseline"
+DEVICE = 0
+PROJECT_ROOT = Path(__file__).parent.parent
