@@ -68,6 +68,75 @@ Table 1. Collected analytics data about dataset.
 | Valid  | 4641     | 4641          | 107x100        | 6000x4000      | 25868   | 12404     |
 | Test   | 2261     | 2261          | 107x144        | 6598x3840      | 13217   | 6751      |
 
+## Training
+
+Training is performed using **Ultralytics YOLO models**.  
+The dataset is automatically downloaded from Kaggle using `kagglehub` during training.
+
+### Prerequisites
+
+1. Python **3.10** (recommended)
+2. CUDA-enabled GPU (optional but recommended)
+3. Installed dependencies:
+
+```sh
+pip install -r requirements.txt
+```
+### Launch
+Training is launched via a Python CLI script.
+
+```sh
+python train.py \
+    --model yolov8n.pt \
+    --epochs 50 \
+    --imgsz 640 \
+    --batch 16
+```
+
+| Argument   | Description                           | Example                    |
+| ---------- | ------------------------------------- | -------------------------- |
+| `--model`  | YOLO model checkpoint or architecture | `yolov8n.pt`, `yolov8s.pt` |
+| `--epochs` | Number of training epochs             | `50`                       |
+| `--imgsz`  | Input image size                      | `640`                      |
+| `--batch`  | Batch size                            | `16`                       |
+
+### Output
+Training outputs
+
+After training, all experiment artifacts are saved to:
+```sh
+runs/detect/
+```
+
+## Inference
+Inference is performed using a trained YOLO checkpoint (.pt file).
+
+If you want to launch inference, you should use next command:
+```sh
+python infer.py \
+    --weights runs/detect/yolov8n_baseline/weights/best.pt \
+    --source path/to/image_or_directory
+
+| Argument    | Description                              | Example                |
+| ----------- | ---------------------------------------- | ---------------------- |
+| `--weights` | Path to trained YOLO weights             | `best.pt`              |
+| `--source`  | Image, directory, or video for inference | `image.jpg`, `images/` |
+
+```
+
+### Inference outputs
+
+Prediction results are saved automatically to:
+```sh
+runs/detect/predict/
+```
+
+### Notes
+Inference does not require access to the Kaggle dataset
+
+Only the trained .pt file is required
+
+GPU is optional for inference, but recommended for speed
 
 # Extra links:
 
