@@ -1,6 +1,7 @@
-from pathlib import Path
 from ultralytics import YOLO
+
 from helmet_detect.constants import PROJECT_ROOT
+
 
 def infer(args):
     model = YOLO(args.weights)

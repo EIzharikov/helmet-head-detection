@@ -1,25 +1,25 @@
 from datetime import datetime
 from pathlib import Path
-import kagglehub
+
 from ultralytics import YOLO
-from helmet_detect.constants import DEVICE, KAGGLE_DATASET, PROJECT_ROOT, get_yaml_path
+
+from helmet_detect.constants import DATA_YAML_RELATIVE, DEVICE, RESULTS_PATH
+
 
 def train(args):
-    dataset_path = Path(kagglehub.dataset_download(KAGGLE_DATASET))
-    yaml_path = get_yaml_path(dataset_path)
-
     model = YOLO(args.model)
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    run_name = f"{Path(args.model).stem}_{timestamp}"
+    run_name = f"{RESULTS_PATH}/{Path(args.model).name}_epochs{args.epochs}_imgsz{args.imgsz}_batch{args.batch}_freeze{args.freeze}_{timestamp}"
 
     model.train(
-        data=yaml_path,
+        data=DATA_YAML_RELATIVE,
         epochs=args.epochs,
         imgsz=args.imgsz,
         batch=args.batch,
         device=DEVICE,
         project="helmet-head-detection",
         name=run_name,
+        save_period=1,
     )
-    print(f"Training completed. Results saved in project '{PROJECT_ROOT}/runs/detect/{run_name}'")
+    print(f"Training completed. Results saved in project '{run_name}'")

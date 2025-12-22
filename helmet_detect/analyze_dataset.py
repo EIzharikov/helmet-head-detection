@@ -6,6 +6,8 @@ import numpy as np
 from PIL import Image
 from tqdm import tqdm
 
+from helmet_detect.constants import KAGGLE_DATASET
+
 
 def analyze_dataset(dataset_path: str):
     splits = ["train", "valid", "test"]
@@ -104,10 +106,8 @@ def plot_image_size_distribution(summary):
 
 
 def main():
-    path = kagglehub.dataset_download("vodan37/yolo-helmethead")
-    print("Path to dataset files:", path)
-
-    summary = analyze_dataset(path)
+    print("Path to dataset files:", KAGGLE_DATASET)
+    summary = analyze_dataset(KAGGLE_DATASET)
     plot_image_size_distribution(summary)
     recommend_imgsz(summary)
     print("\nDataset analysis completed.")
