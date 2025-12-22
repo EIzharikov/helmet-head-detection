@@ -123,3 +123,7 @@ venv.bak/
 
 # mkdocs documentation
 /site
+
+# cv runs
+/runs
+/test_images
