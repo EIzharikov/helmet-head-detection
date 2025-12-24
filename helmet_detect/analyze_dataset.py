@@ -5,13 +5,27 @@ import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 from tqdm import tqdm
+from pathlib import Path
+from collections import Counter
 
-from helmet_detect.constants import KAGGLE_DATASET
+from constants import KAGGLE_DATASET
 
 
 def analyze_dataset(dataset_path: str):
     splits = ["train", "valid", "test"]
     class_map = {0: "head", 1: "helmet"}
+
+    labels_path = Path(dataset_path) / "helm" / "helm" / "labels" / "train"
+
+    counter = Counter()
+
+    for label_file in labels_path.glob("*.txt"):
+        with open(label_file, "r") as f:
+            for line in f:
+                class_id = int(line.split()[0])
+                counter[class_id] += 1
+
+    print(counter)
 
     summary = {}
 
