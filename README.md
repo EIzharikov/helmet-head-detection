@@ -76,7 +76,7 @@ To get from dataset, follow next steps:
    ```
 4. Launch script:
    ```sh
-   python ./analyze_dataset.py
+   python ./helmet_detect/analyze_dataset.py
    ```
 
 Table 1. Collected analytics data about dataset.
