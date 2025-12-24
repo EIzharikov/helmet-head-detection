@@ -127,3 +127,4 @@ venv.bak/
 # cv runs
 /runs
 /test_images
+/results

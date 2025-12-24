@@ -86,7 +86,7 @@ pip install -r requirements.txt
 Training is launched via a Python CLI script.
 
 ```sh
-python train.py \
+python helmet_detect train \
     --model yolov8n.pt \
     --epochs 50 \
     --imgsz 640 \
@@ -113,23 +113,19 @@ Inference is performed using a trained YOLO checkpoint (.pt file).
 
 If you want to launch inference, you should use next command:
 ```sh
-python infer.py \
+python helmet_detect train \
     --weights runs/detect/yolov8n_baseline/weights/best.pt \
     --source path/to/image_or_directory
-
+```
 | Argument    | Description                              | Example                |
 | ----------- | ---------------------------------------- | ---------------------- |
 | `--weights` | Path to trained YOLO weights             | `best.pt`              |
 | `--source`  | Image, directory, or video for inference | `image.jpg`, `images/` |
 
-```
 
 ### Inference outputs
 
-Prediction results are saved automatically to:
-```sh
-runs/detect/predict/
-```
+Prediction results are saved automatically to `runs/detect/predict/`
 
 ### Notes
 Inference does not require access to the Kaggle dataset
@@ -137,6 +133,29 @@ Inference does not require access to the Kaggle dataset
 Only the trained .pt file is required
 
 GPU is optional for inference, but recommended for speed
+
+## Evaluate
+Evaluate is performed using a trained weights.
+
+If you want to launch evaluate, you should use next command:
+```sh
+python helmet_detect evaluate \
+    --weights-dir results/yolo11/weights \
+    --output ./results_yolo11.xlsx  
+```
+| Argument    | Description                              | Example                |
+| ----------- | ---------------------------------------- | ---------------------- |
+| `--weights-dir` | Path to trained YOLO weights             | `results/yolo11/weights`              |
+| `--output`  | Output path  | `results.xlsx` |
+
+### Evaluate output
+Evaluate output will look like this table:
+| Model    | params_M    | imgsz                | precision | recall | mAP50 | mAP50-95 | inference_ms |
+|----------|-------------|----------------------|-----------|--------|-------|----------|--------------|
+| epoch3.pt| 2.58        | 640                  | 0.90      | 0.83   | 0.91  | 0.53     | 2.65         |
+| epoch2.pt| 2.58        | 640                  | 0.89      | 0.82   | 0.89  | 0.52     | 2.65         |
+| epoch1.pt| 2.58        | 640                  | 0.87      | 0.80   | 0.88  | 0.50     | 2.65         |
+| epoch0.pt| 2.58        | 640                  | 0.88      | 0.78   | 0.84  | 0.46     | 2.65         |
 
 # Extra links:
 
