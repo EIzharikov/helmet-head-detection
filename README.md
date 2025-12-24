@@ -47,6 +47,10 @@ All necessary requirements have been met:
 - Train/val/test separation
 - YOLO format
 
+The dataset is characterized by a moderately pronounced class imbalance with a predominance of objects of the "head" class. ("head": 89181, "helmet": 43127)
+
+An analysis of the class distribution across the training, validation, and test sets revealed an equal ratio of "head" and "helmet" class objects (approximately 2:1). This indicates a correct and representative partitioning of the dataset. However, the dataset itself is characterized by a pronounced class imbalance.
+
 ### Analytics:
 
 To get from dataset, follow next steps:
@@ -67,6 +71,7 @@ To get from dataset, follow next steps:
 
 3. Install requirements:
    ```sh
+   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
    pip install -r ./requirements.txt
    ```
 4. Launch script:
