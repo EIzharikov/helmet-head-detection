@@ -19,6 +19,9 @@ def main():
     train_parser.add_argument(
         "--freeze", type=int, default=0, help="Amount of freezed layers"
     )
+    train_parser.add_argument(
+    "--augment", action="store_true", help="Enable data augmentation"
+    )
 
     # ====== INFER ======
     infer_parser = subparsers.add_parser("infer", help="Run inference")
