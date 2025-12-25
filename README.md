@@ -138,7 +138,7 @@ Inference is performed using a trained YOLO checkpoint (.pt file).
 If you want to launch inference, you should use next command:
 
 ```sh
-python helmet_detect train \
+python helmet_detect infer \
     --weights runs/detect/yolov8n_baseline/weights/best.pt \
     --source path/to/image_or_directory
 ```
@@ -180,12 +180,12 @@ python helmet_detect evaluate \
 ### Evaluate output
 
 Evaluate output will look like this table:
-| Model | params_M | imgsz | precision | recall | mAP50 | mAP50-95 | inference_ms |
-|----------|-------------|----------------------|-----------|--------|-------|----------|--------------|
-| epoch3.pt| 2.58 | 640 | 0.90 | 0.83 | 0.91 | 0.53 | 2.65 |
-| epoch2.pt| 2.58 | 640 | 0.89 | 0.82 | 0.89 | 0.52 | 2.65 |
-| epoch1.pt| 2.58 | 640 | 0.87 | 0.80 | 0.88 | 0.50 | 2.65 |
-| epoch0.pt| 2.58 | 640 | 0.88 | 0.78 | 0.84 | 0.46 | 2.65 |
+| Model    | params_M    | imgsz | precision | recall | mAP50 | mAP50-95 | inference_ms |
+|----------|-------------|-------|-----------|--------|-------|----------|--------------|
+| epoch3.pt| 2.58        | 640   | 0.90      | 0.83   | 0.91  | 0.53     | 2.65         |
+| epoch2.pt| 2.58        | 640   | 0.89      | 0.82   | 0.89  | 0.52     | 2.65         |
+| epoch1.pt| 2.58        | 640   | 0.87      | 0.80   | 0.88  | 0.50     | 2.65         |
+| epoch0.pt| 2.58        | 640   | 0.88      | 0.78   | 0.84  | 0.46     | 2.65         |
 
 # Extra links:
 
