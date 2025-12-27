@@ -3,7 +3,8 @@ from pathlib import Path
 
 from ultralytics import YOLO
 
-from helmet_detect.constants import DATA_YAML_RELATIVE, DEVICE, RESULTS_PATH
+from helmet_detect.constants import (DATA_YAML_RELATIVE, RESULTS_PATH,
+                                     get_device)
 
 
 def train(args):
@@ -25,21 +26,19 @@ def train(args):
             copy_paste=0.0,
         )
     else:
-        augment_kwargs = dict(
-            augment=False
-        )
+        augment_kwargs = dict(augment=False)
 
     model.train(
         data=DATA_YAML_RELATIVE,
         epochs=args.epochs,
         imgsz=args.imgsz,
         batch=args.batch,
-        device=DEVICE,
+        device=get_device(),
         project="helmet-head-detection",
         name=run_name,
         plots=True,
         seed=42,
         freeze=args.freeze,
-        **augment_kwargs
+        **augment_kwargs,
     )
     print(f"Training completed. Results saved in project '{run_name}'")

@@ -1,14 +1,12 @@
+from collections import Counter
 from pathlib import Path
 
 import kagglehub
 import matplotlib.pyplot as plt
 import numpy as np
+from constants import KAGGLE_DATASET
 from PIL import Image
 from tqdm import tqdm
-from pathlib import Path
-from collections import Counter
-
-from constants import KAGGLE_DATASET
 
 
 def analyze_dataset(dataset_path: str):
