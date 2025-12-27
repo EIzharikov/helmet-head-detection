@@ -20,7 +20,7 @@ def main():
         "--freeze", type=int, default=0, help="Amount of freezed layers"
     )
     train_parser.add_argument(
-    "--augment", action="store_true", help="Enable data augmentation"
+        "--augment", action="store_true", help="Enable data augmentation"
     )
 
     # ====== INFER ======

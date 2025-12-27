@@ -1,11 +1,11 @@
-from pathlib import Path
 import re
+from pathlib import Path
 
 import pandas as pd
 from ultralytics import YOLO
 
-from helmet_detect.constants import DATA_YAML_RELATIVE, DEVICE, PROJECT_ROOT
-
+from helmet_detect.constants import (DATA_YAML_RELATIVE, PROJECT_ROOT,
+                                     get_device)
 
 RUN_PATTERN = re.compile(
     r"""
@@ -73,7 +73,7 @@ def evaluate(args):
         metrics = model.val(
             data=PROJECT_ROOT / DATA_YAML_RELATIVE,
             imgsz=meta["imgsz"],
-            device=DEVICE,
+            device=get_device(),
             plots=False,
             save=False,
         )

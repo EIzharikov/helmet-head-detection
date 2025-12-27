@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import kagglehub
+import torch
 
 # =====================
 # Dataset
@@ -13,6 +14,11 @@ DATA_YAML_RELATIVE = KAGGLE_DATASET / "helm" / "helm" / "helm.yaml"
 # Experiment
 # =====================
 PROJECT_NAME = "helmet-head-detection"
-DEVICE = 0
 PROJECT_ROOT = Path(__file__).parent.parent
 RESULTS_PATH = PROJECT_ROOT / "results"
+
+
+def get_device():
+    if torch.cuda_is_avaiable:
+        return 0
+    return "cpu"

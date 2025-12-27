@@ -71,7 +71,6 @@ To get from dataset, follow next steps:
 
 3. Install requirements:
    ```sh
-   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
    pip install -r ./requirements.txt
    ```
 4. Launch script:
