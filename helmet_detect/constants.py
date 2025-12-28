@@ -19,6 +19,6 @@ RESULTS_PATH = PROJECT_ROOT / "results"
 
 
 def get_device():
-    if torch.cuda_is_avaiable:
+    if torch.cuda.is_available():
         return 0
     return "cpu"
